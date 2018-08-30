@@ -6,15 +6,10 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-
-const instructions = Platform.select({
-    ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-    android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Button from "../components/Button";
+import { colors } from '../config/styles';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -24,7 +19,7 @@ export default class App extends Component<Props> {
                 <Text style={styles.instructions}>1. Pick a duration</Text>
                 <Text style={styles.component}>Timer wheel here</Text>
                 <Text style={styles.instructions}>2. Start the timer!</Text>
-                <Text style={styles.instructions}>Button here</Text>
+                <Button text={'Start timer'} />
             </View>
         );
     }
@@ -34,8 +29,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        // alignItems: 'flex-start',
-        backgroundColor: '#F5FCFF',
+        alignItems: 'center',
+        backgroundColor: colors.backgroundColor,
     },
     instructions: {
         fontSize: 20,
