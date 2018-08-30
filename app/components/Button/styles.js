@@ -10,7 +10,7 @@ export default StyleSheet.create({
   },
   buttonText: {
     color: colors.buttonText,
-    fontSize: 16,
+    fontSize: 32,
     fontWeight: '500',
   },
 });
