@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Button from '../components/Button';
 import { colors } from '../config/styles';
-import TimerInput from '../components/TimerInput/TimerInput';
+import TimerInput from '../components/TimerInput';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,6 +39,7 @@ export default class App extends Component {
           placeholder="00:00:00"
           onChangeText={time => this.setState({ time })}
           value={this.state.time}
+          maxLength={6}
         />
         <Text style={styles.instructions}>2. Start the timer!</Text>
         <Button text="Start timer" />
