@@ -31,15 +31,55 @@ export default class App extends Component {
     };
   }
 
+  addColons = (time) => {
+    if (time === "")
+      return;
+
+    let timeStr = time.replace(/[^0-9]/g, "");
+    timeStr = timeStr.replace(/:/g, "");
+    let ret = "";
+
+    if (timeStr.length === 0) {
+      return timeStr;
+    } else if (timeStr.length === 3 || timeStr.length === 5) {
+      const left = timeStr.substr(0, 1);
+      let right = timeStr.substr(1, timeStr.length);
+      if (timeStr.length === 5) {
+        right = right.match(/.{1,2}/g).join(":");
+      }
+      ret = left + ":" + right;
+    } else {
+      ret = timeStr.match(/.{1,2}/g).join(":");
+    }
+    return ret;
+  };
+
+  formatTimeInput = (time) => {
+    const timeArray = time.split(":");
+    let hours; let minutes; let seconds;
+    if (timeArray.length === 1) {
+      seconds = timeArray[0] % 60;
+      minutes = 1;
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.instructions}>1. Pick a duration</Text>
         <TimerInput
           placeholder="00:00:00"
-          onChangeText={time => this.setState({ time })}
-          value={this.state.time}
-          maxLength={6}
+          onChangeText={(time) => {
+            let formattedTime = this.addColons(time);
+            this.setState({ time: formattedTime });
+          }}
+          onSubmitEditing={(event) => {
+            let time = this.state["time"];
+            time = this.formatTimeInput(time);
+            this.setState({ time: time });
+          }}
+        value={this.state.time}
+          maxLength={8}
         />
         <Text style={styles.instructions}>2. Start the timer!</Text>
         <Button text="Start timer" />
