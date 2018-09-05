@@ -55,57 +55,67 @@ export default class App extends Component {
   };
 
   formatTimeInput = (time) => {
+    if (time === undefined)
+      return;
+
     const timeArray = time.split(":");
-    let hours = ""; let minutes = ""; let seconds = "";
+    let hours = -1; let minutes = -1; let seconds = -1;
     if (timeArray.length === 1) {
-      seconds = timeArray[0];
-      if (seconds - 60 > 0) {
+      seconds = parseInt(timeArray[0]);
+      if (seconds - 60 >= 0) {
         seconds -= 60;
         minutes = 1;
       }
     } else if (timeArray.length === 2) {
-      seconds = timeArray[1];
-      minutes = timeArray[0];
-      if (seconds - 60 > 0) {
+      seconds = parseInt(timeArray[1]);
+      minutes = parseInt(timeArray[0]);
+      if (seconds - 60 >= 0) {
         seconds -= 60;
+        console.log("MINUTES: " + minutes);
         minutes += 1;
+        console.log("minnutes " + minutes + " seconds " + seconds);
       }
-      if (minutes - 60 > 60) {
+      if (minutes - 60 >= 0) {
         minutes -= 60;
         hours = 1;
       }
     } else if (timeArray.length === 3) {
-      seconds = timeArray[2];
-      minutes = timeArray[1];
-      hours = timeArray[0];
-      if (seconds - 60 > 0) {
+      seconds = parseInt(timeArray[2]);
+      minutes = parseInt(timeArray[1]);
+      hours = parseInt(timeArray[0]);
+      if (seconds - 60 >= 0) {
         seconds -= 60;
         minutes += 1;
       }
-      if (minutes - 60 > 60) {
+      if (minutes - 60 >= 0) {
+        console.log("minutes before is: " + minutes);
         minutes -= 60;
+        console.log("minutes after is: " + minutes);
         hours += 1;
       }
-      if (hours > 99)
+      if (hours > 99) {
         hours = 99;
+        minutes = 59;
+        seconds = 59;
+      }
     }
 
-    if (hours === "") {
+    if (hours === -1) {
       hours = "00";
     } else if (hours < 10) {
       hours = "0" + hours;
     }
-    if (minutes === "") {
+    if (minutes === -1) {
       minutes = "00" ;
     } else if (minutes < 10) {
       minutes = "0" + minutes;
     }
-    if (seconds === "") {
+    if (seconds === -1) {
       seconds = "00";
     } else if (seconds < 10) {
       seconds = "0"  + seconds;
     }
-    console.log("!!!!!!");
+    console.log("hours, minutes, seconds: " + hours + " " + minutes + " " + seconds);
     return hours + ":" + minutes + ":" + seconds;
   };
 
