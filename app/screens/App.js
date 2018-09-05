@@ -56,11 +56,57 @@ export default class App extends Component {
 
   formatTimeInput = (time) => {
     const timeArray = time.split(":");
-    let hours; let minutes; let seconds;
+    let hours = ""; let minutes = ""; let seconds = "";
     if (timeArray.length === 1) {
-      seconds = timeArray[0] % 60;
-      minutes = 1;
+      seconds = timeArray[0];
+      if (seconds - 60 > 0) {
+        seconds -= 60;
+        minutes = 1;
+      }
+    } else if (timeArray.length === 2) {
+      seconds = timeArray[1];
+      minutes = timeArray[0];
+      if (seconds - 60 > 0) {
+        seconds -= 60;
+        minutes += 1;
+      }
+      if (minutes - 60 > 60) {
+        minutes -= 60;
+        hours = 1;
+      }
+    } else if (timeArray.length === 3) {
+      seconds = timeArray[2];
+      minutes = timeArray[1];
+      hours = timeArray[0];
+      if (seconds - 60 > 0) {
+        seconds -= 60;
+        minutes += 1;
+      }
+      if (minutes - 60 > 60) {
+        minutes -= 60;
+        hours += 1;
+      }
+      if (hours > 99)
+        hours = 99;
     }
+
+    if (hours === "") {
+      hours = "00";
+    } else if (hours < 10) {
+      hours = "0" + hours;
+    }
+    if (minutes === "") {
+      minutes = "00" ;
+    } else if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    if (seconds === "") {
+      seconds = "00";
+    } else if (seconds < 10) {
+      seconds = "0"  + seconds;
+    }
+    console.log("!!!!!!");
+    return hours + ":" + minutes + ":" + seconds;
   };
 
   render() {
