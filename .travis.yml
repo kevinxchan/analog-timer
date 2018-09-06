@@ -1,3 +1,13 @@
 language: node_js
 node_js:
   - "10.2.1"
+cache:
+  yarn: true
+  directories:
+    - "node_modules"
+branches:
+  only:
+    - master
+install:
+  - npm install
+
