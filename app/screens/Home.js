@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class App extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -143,3 +143,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default Home;
